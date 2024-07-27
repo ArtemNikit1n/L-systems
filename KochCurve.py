@@ -7,7 +7,7 @@ class LSystem2D:
         self.axiom = axiom
         self.state = axiom
         self.width = width
-        self.lenght = length
+        self.length = length
         self.angle = angle
         self.t = t
         self.rules = {}
@@ -34,7 +34,11 @@ class LSystem2D:
 
         for move in self.state:
             if move == 'F':
-                self.t.forward(self.lenght)
+                self.t.forward(self.length)
+            elif move == 'S':
+                self.t.up()
+                self.t.forward(self.length)
+                self.t.down()
             elif move == '+':
                 self.t.left(self.angle)
             elif move == '-':
@@ -43,9 +47,10 @@ class LSystem2D:
         done()
 
 
-width = 1500
-height = 600
+width = 500
+height = 500
 screen = Screen()
+screensize(5000, 5000)
 screen.setup(width, height, 0, 0)
 
 t = Turtle()
@@ -53,9 +58,12 @@ t.ht()
 
 pen_width = 2
 f_len = 5
-angle = 60
+angle = 90
+axiom = 'F+F+F+F'
 
-l_sys = LSystem2D(t, 'F--F--F', pen_width, f_len, angle)
-l_sys.add_rules(('F', 'F+F--F+F'))
-l_sys.generate_path(3)
+l_sys = LSystem2D(t, axiom, pen_width, f_len, angle)
+# l_sys.add_rules(('F', 'F+F--F+F'))
+# l_sys.add_rules(('F', 'F+FF-FF-F-F+F+FF-F-F+F+FF+FF-F'))
+l_sys.add_rules(("F", "F+S-FF+F+FF+FS+FF-S+FF-F-FF-FS-FFF"), ('S', 'SSSSSS'))
+l_sys.generate_path(2)
 l_sys.draw_turtle((0, 0), 0)
