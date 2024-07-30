@@ -1,4 +1,3 @@
-import turtle
 from turtle import *
 
 
@@ -50,20 +49,23 @@ class LSystem2D:
 width = 500
 height = 500
 screen = Screen()
-screensize(5000, 5000)
+screensize(10000, 10000)
 screen.setup(width, height, 0, 0)
 
 t = Turtle()
 t.ht()
 
+t.screen.bgcolor("#000006")
+t.color('#4f1c38')
+# t.color('#b92c2d')
 pen_width = 2
-f_len = 5
+f_len = 4.5
 angle = 90
 axiom = 'F+F+F+F'
 
 l_sys = LSystem2D(t, axiom, pen_width, f_len, angle)
 # l_sys.add_rules(('F', 'F+F--F+F'))
-# l_sys.add_rules(('F', 'F+FF-FF-F-F+F+FF-F-F+F+FF+FF-F'))
-l_sys.add_rules(("F", "F+S-FF+F+FF+FS+FF-S+FF-F-FF-FS-FFF"), ('S', 'SSSSSS'))
-l_sys.generate_path(2)
+l_sys.add_rules(('F', 'F+FF-FF-F-F+F+FF-F-F+F+FF+FF-F'))
+# l_sys.add_rules(("F", "F+S-FF+F+FF+FS+FF-S+FF-F-FF-FS-FFF"), ('S', 'SSSSSS'))
+l_sys.generate_path(4)
 l_sys.draw_turtle((0, 0), 0)
